@@ -1,29 +1,38 @@
 const prompt = require("prompt-sync")();
 
-let estoque = 120,valor;
+let estoque = 200, valor;
 
-function baixaEstoque(){
-    estoque= estoque-valor;
-}
-
-function verificaEstoque(){
-    if(estoque - valor >= 0){
-        baixaEstoque(valor);   
-    }else{
-        console.log("Não pode deixar o estoque negativo");
-    }
-}
-
-function solicitaValor(){
-    valor = Number(prompt("Informe o valor: "));
-}
-
-function apresentarEstoque(){
+function apresentarEstoque() {
     console.log("O estoque agora é: "+estoque);
 }
 
-while(estoque >= 10){
-    solicitaValor();
-    verificaEstoque();
+function naoPodeRetirarZerado(){
+    console.log("O estoque não pode ficar zerado");
+}
+
+function retirarDoEstoque(){
+    estoque= estoque - valor;
+}
+
+function verificarSeFicaNegativo(){
+    if(estoque - valor >= 0) retirarDoEstoque();
+    else naoPodeRetirarZerado();
+}
+
+function verificarSeRecebeuValorPositivo(){
+    if(valor < 0){
+        console.log("Valor não pode ser negativo");
+    }else{
+        verificarSeFicaNegativo();
+    }
+}
+
+function solicitarValor(){
+    valor = Number(prompt("Informe o valor: "));
+}
+
+while (estoque >= 10) {
+    solicitarValor();
+    verificarSeRecebeuValorPositivo();
     apresentarEstoque();
 }

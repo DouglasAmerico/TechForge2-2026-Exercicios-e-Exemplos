@@ -1,10 +1,7 @@
-const prompt = require("prompt-sync")();
-
-function soma(a,b){
-    console.log(a+b);
+let valor = 10
+function apresentar(){
+    let numero = 20;
+    console.log(numero + valor);
 }
-
-let a = Number(prompt("Informe um valor: "));
-let b = Number(prompt("Informe um valor: "));
-
-soma(a,b);
+console.log(valor);
+apresentar();
