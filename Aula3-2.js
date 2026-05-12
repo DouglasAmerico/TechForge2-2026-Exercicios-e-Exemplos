@@ -1,7 +1,12 @@
-function soma(n1,n2){
-    return n1+n2;
+const prompt = require("prompt-sync")();
+
+function verificarMaioridade(idade){
+    if(idade >= 18){
+        return "Maior";
+    }else{
+        return "Menor";
+    }
 }
 
-
-let resultado = soma(2,3)
-console.log(resultado);
+let idade = Number(prompt("Informe a idade: "));
+console.log(" A idade informada "+idade+" é de "+verificarMaioridade(idade));

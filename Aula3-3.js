@@ -1,35 +1,49 @@
 const prompt = require("prompt-sync")();
 
-function solicitaNotaAoUsuario(){//solicita a nota ao usuario
-    return Number(prompt("Informe a nota: "));
+function solicitar(){
+    let nome = prompt("Informe o nome: ");
+    let salarioMinimo = verificarSalarioMinimo();
+    let salario = verificarSalario(salarioMinimo);
+    let salarioReajustado = calcularReajuste(salario);
+    apresentar(nome,salario,salarioReajustado);
 }
 
-function verificaStatus(nota){//verifica o status da nota
-    if(nota >= 7){
-        return "Aprovado";
-    }else if(nota >= 4){
-        return "Exame";
+function verificarSalarioMinimo(){
+    let sm;
+    do{
+        sm= Number(prompt("Informe o salario minimo: "));
+        if(sm < 0){
+            console.log("Informe um salario valido");
+        }
+    }while(sm < 0);
+    return sm;
+}
+
+function verificarSalario(sm){
+    let salario;
+    do{
+        salario= Number(prompt("Informe o salario: "));
+        if(salario < sm){
+            console.log("O salario tem que ser maior ou igual a "+sm);
+        }
+    }while(salario<sm);
+    return salario;
+}
+
+function calcularReajuste(salario){
+    if(salario >= 10000){
+        return salario*1.01;
+    }else if(salario >= 5000){
+        return salario*1.05;
+    }else if(salario >= 3000){
+        return salario*1.1;
     }else{
-        return "Reprovado";
+        return salario*1.15;
     }
 }
 
-function validacaoDeNota(){//solicita a nota,valida a nota, retorna o status ja calculado
-    let nota;
-    do{
-        nota= solicitaNotaAoUsuario();
-        if(nota > 10 || nota < 0){
-            console.log("Informe uma nota valida");
-        }else{
-            return verificaStatus(nota);
-        }
-
-    }while(nota > 10 || nota < 0)
+function apresentar(nome,salario,salarioReajustado){
+    console.log("O empregado "+nome+" recebia "+salario+" e passara a receber "+salarioReajustado);
 }
 
-function apresentacao(resultado){//apresenta o resultado
-    console.log("o aluno ficou com o resultado "+resultado);
-}
-
-apresentacao(validacaoDeNota());//chama a função validação de nota, que vai retornar o status e depois manda
-                                //para a apresentação
+solicitar();

@@ -1,15 +1,15 @@
 const prompt = require("prompt-sync")();
 
-function soma(a,b){
-    if(a == undefined || b == undefined){
-        console.log("Não recebi um dos valores");
-    }else{
-        console.log(a+b);
-    }
+function somar(v1,v2){
+    apresentar(v1+v2);
 }
 
-function chamada(){
-    return Number(prompt("Informe o valor: "));
+function apresentar(resultado){
+    console.log("O resultado é: "+resultado);    
 }
 
-soma(chamada(),chamada());
+function solicitar(){
+    somar(Number(prompt("Informe o valor 1: ")),Number(prompt("Informe o valor 2: ")));
+}
+
+solicitar();
